@@ -163,5 +163,38 @@ public class RoleDaoImpl extends DBUtils implements RoleDao {
         return k;
     }
 
+    @Override
+    public Role findAllById(int roleid) {
+        Role role = new Role();
+        List menuList=new ArrayList();
+
+        String sql = "select * from role r, menu m, middle mid where r.roleid=mid.roleid and mid.menuid=m.menuid and r.roleid=?";
+        List params=new ArrayList();
+        params.add(roleid);
+
+        try {
+            resultSet=query(sql,params);
+            while(resultSet.next()){
+                role.setRoleId(resultSet.getInt("roleid"));
+                role.setRoleName(resultSet.getString("rolename"));
+                role.setRoleState(resultSet.getInt("rolestate"));
+
+                Menu menu = new Menu();
+                menu.setMenuId(resultSet.getInt("menuid"));
+                menu.setMenuName(resultSet.getString("menuname"));
+                menu.setUrl(resultSet.getString("url"));
+                menu.setState(resultSet.getInt("state"));
+                menu.setUpMenuId(resultSet.getInt("upmenuid"));
+                menuList.add(menu);
+            }
+            role.setMenuList(menuList);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeAll();
+        }
+        return role;
+    }
+
 
 }

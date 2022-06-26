@@ -20,4 +20,6 @@ public interface RoleDao {
     int updateRole(Role role);
 
     int deleteRole(int id);
+
+    Role findAllById(int roleid);
 }

@@ -28,6 +28,7 @@ public class UsersDaoImpl extends DBUtils implements UsersDao {
                 users.setLoginName(username);
                 users.setRealName(resultSet.getString("realname"));
                 users.setUserId(resultSet.getInt("userid"));
+                users.setRoleId(resultSet.getInt("roleid"));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

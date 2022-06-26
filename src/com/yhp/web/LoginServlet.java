@@ -1,5 +1,6 @@
 package com.yhp.web;
 
+import com.yhp.bean.Menu;
 import com.yhp.bean.Users;
 import com.yhp.service.UsersService;
 import com.yhp.service.impl.UsersServiceImpl;
@@ -34,6 +35,11 @@ public class LoginServlet extends HttpServlet {
             //跳转到主页面
             //保存用户信息
             req.getSession().setAttribute("u1",users);
+            for(Menu menu:users.getRole().getMenuList()){
+                for(Menu menu1: menu.getSecondMenu()){
+                    System.out.println(menu1.getMenuId());
+                }
+            }
             resp.sendRedirect("index.jsp");
         }
     }

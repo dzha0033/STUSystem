@@ -44,10 +44,10 @@
                         <td>
                             <c:forEach items="${all}" var="m">
                                 <ul>
-                                    <li><input type="checkbox" name="menu" ${m.use==1?'checked':'disabled'} value="${m.menuId}" />${m.menuName}
+                                    <li><input type="checkbox" name="menu" ${m.use==1?'checked disabled':'disabled'} value="${m.menuId}" />${m.menuName}
                                         <ul>
                                             <c:forEach items="${m.secondMenu}" var="m2">
-                                                <li>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" ${m2.use==1?'checked':'disabled'} value="${m2.menuId}"
+                                                <li>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" ${m2.use==1?'checked disabled':'disabled'} value="${m2.menuId}"
                                                                                    name="menu" />${m2.menuName}</li>
                                             </c:forEach>
                                         </ul>
