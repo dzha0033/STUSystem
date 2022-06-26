@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>
@@ -62,17 +63,17 @@
                 </tr>
                 
                
-                
+               <c:forEach items="${pi.dataList}" var="r" varStatus="sta">
                 <tr align="center">
                     <th><input type="checkbox"/></th>
                     <td>
-                        1
+                            ${sta.count}
                     </td>
                     <td>
-                       个人信息
+                            ${r.roleName}
                     </td>                    
                     <td>&nbsp;
-                        启用
+                        ${r.roleState == 1?"启用": "未启用"}
                     </td>
                     
                     <td>&nbsp;
@@ -82,12 +83,33 @@
 						<a href="javascript:void(0)" onclick="del();return false" class="tablelink"> 删除</a>						   
                     </td>
                 </tr>
-               
-                
+               </c:forEach>
+
             </tbody>
         </table>
         
-          <div class='MainStyle'><div class=''><a href='http://sm.zk0731.com/OnlineTeaching/StudentMaterial.aspx?page=1' target='_self'>首页</a></div><div class=''><a href='javascript:void(0)' target='_self'>上一页</a></div><div class='NowItemStyle'><a href='javascript:void(0)' target='_self'>1</a></div><div class=''><a href='http://sm.zk0731.com/OnlineTeaching/StudentMaterial.aspx?page=2' target='_self'>2</a></div><div class=''><a href='http://sm.zk0731.com/OnlineTeaching/StudentMaterial.aspx?page=3' target='_self'>3</a></div><div class=''><a href='http://sm.zk0731.com/OnlineTeaching/StudentMaterial.aspx?page=2' target='_self'>下一页</a></div><div class=''><a href='http://sm.zk0731.com/OnlineTeaching/StudentMaterial.aspx?page=3' target='_self'>尾页</a></div><div class=''>总共<b>44</b>条数据</div><div class=''>每页<b>20</b>条数据</div><div class=''><b>1</b>/3</div><div class='SearchStyle'><input type='text' id='john_Page_Search' onkeydown="if(event.keyCode == 13){page_searchIndex();}"/></div><div class=''><input type='button' value='Go' onclick="page_searchIndex()"/></div></div><script>    function page_searchIndex(){        var searchText = document.getElementById('john_Page_Search');        var searchIndex = searchText != null && searchText.value != '' ? parseInt(searchText.value) : 0;        if(searchIndex > 0 && searchIndex <= 3) {             window.location='StudentMaterial.aspx?page=' + searchIndex;        }        else        {            alert('需要跳转的页码不能超出范围！');        }    }</script>
+          <div class='MainStyle'>
+              <div class=''>
+                  <a href='http://sm.zk0731.com/OnlineTeaching/StudentMaterial.aspx?page=1' target='_self'>首页</a>
+              </div><div class=''><a href='javascript:void(0)' target='_self'>上一页</a></div>
+              <div class=''><a href='/power/role/roles?method=select' target='_self'>首页</a>
+              </div>
+              <div class=''><a href='/power/role/roles?method=select&index=${pi.pageIndex-1<=1?1:pi.pageIndex-1}' target='_self'>上一页</a></div>
+
+              <c:forEach begin="1" end="${pi.totalPages}" var="indexa">
+                  <div class=${pi.pageIndex==indexa?'NowItemStyle':''}>
+                      <div class=''><a href='/power/role/roles?method=select&index=${indexa}' target='_self'>${indexa}</a></div>
+                  </div>
+              </c:forEach>
+              <div class=''><a href='/power/role/roles?method=select&index=${pi.pageIndex+1>= pi.totalPages?pi.totalPages:pi.pageIndex+1}' target='_self'>下一页</a>
+              </div>
+              <div class=''><a href='/power/role/roles?method=select&index=${pi.totalPages}' target='_self'>尾页</a>
+              </div>
+              <div class=''>总共<b>${pi.total}</b>条数据</div>
+              <div class=''>每页<b>${pi.pageSize}</b>条数据</div>
+              <div class=''><b>1</b>/3</div>
+              <div class='SearchStyle'><input type='text' id='john_Page_Search' onkeydown="if(event.keyCode == 13){page_searchIndex();}"/></div>
+              <div class=''><input type='button' value='Go' onclick="page_searchIndex()"/></div></div><script>    function page_searchIndex(){        var searchText = document.getElementById('john_Page_Search');        var searchIndex = searchText != null && searchText.value != '' ? parseInt(searchText.value) : 0;        if(searchIndex > 0 && searchIndex <= 3) {             window.location='StudentMaterial.aspx?page=' + searchIndex;        }        else        {            alert('需要跳转的页码不能超出范围！');        }    }</script>
         </div>
     </div>
 
