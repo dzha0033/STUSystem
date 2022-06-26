@@ -160,7 +160,7 @@ public class StudentDaoImpl extends DBUtils implements StudentDao {
     public int updateStu(Student student) {
         int update = 0;
         try {
-            //这里需要大家自己完善非主键列以外的列的更新
+
             String sql="update student set stuname=?,address=?,sex=? where stuid=?";
             List params=new ArrayList();
             params.add(student.getStuName());

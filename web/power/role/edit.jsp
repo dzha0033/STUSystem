@@ -31,12 +31,13 @@
 </div>
 </div>
 <div class="cztable">
-    <form action="list.html" method="post">
+    <form action="/power/role/roles?method=save" method="post">
+        <input type="hidden" name="rid" value="${role.roleId}">
         <table border="1" width="100%" class="table_a">
             <tr width="120px;">
                 <td width="120px">角色名：<span style="color:red">*</span>：</td>
                 <td>
-                    <input type="text" name="rolename" value="${role.roleName}"/>
+                    <input type="text" name="name" value="${role.roleName}"/>
                 </td>
             </tr>
 

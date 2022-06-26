@@ -84,8 +84,9 @@ public class RoleDaoImpl extends DBUtils implements RoleDao {
     public int insertRol(Role role) {
         int key = 0;
         try {
-            String sql = "insert into role values(null,?,?)";
+            String sql = "insert into role values(?,?,?)";
             List params = new ArrayList<>();
+            params.add(role.getRoleId());
             params.add(role.getRoleName());
             params.add(role.getRoleState());
             int i = update(sql, params);
@@ -123,4 +124,44 @@ public class RoleDaoImpl extends DBUtils implements RoleDao {
         }
         return role;
     }
+
+    @Override
+    public int updateRole(Role role) {
+        int key = 0;
+        try {
+            String sql = "update role set rolename=?,rolestate=? where roleid=?";
+            List params = new ArrayList();
+            params.add(role.getRoleName());
+            params.add(role.getRoleState());
+            params.add(role.getRoleId());
+            int k = update(sql,params);
+            ResultSet generatedKeys = pps.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                key = generatedKeys.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeAll();
+        }
+        return key;
+    }
+
+    @Override
+    public int deleteRole(int id) {
+        int k = 0;
+        try {
+            String sql = "delete from role where roleid = ?";
+            List params = new ArrayList<>();
+            params.add(id);
+            k = update(sql, params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeAll();
+        }
+        return k;
+    }
+
+
 }

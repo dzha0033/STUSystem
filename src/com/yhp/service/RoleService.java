@@ -13,7 +13,11 @@ public interface RoleService {
 
     public List<Menu> getAllMenu();
 
-    public int insertRole(String rolename,int state, String[] ids);
+    public int insertRole(String roleid,String rolename,int state, String[] ids);
 
     Role findRole(int key);
+
+    int removeMid(int key);
+
+    int removeRole(int key);
 }
