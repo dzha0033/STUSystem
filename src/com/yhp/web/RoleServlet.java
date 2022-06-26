@@ -4,7 +4,6 @@ import com.yhp.bean.Menu;
 import com.yhp.bean.Role;
 import com.yhp.service.RoleService;
 import com.yhp.service.impl.RoleServiceImpl;
-import com.yhp.service.impl.UsersServiceImpl;
 import com.yhp.util.PageUtil;
 
 import javax.servlet.ServletException;
@@ -21,6 +20,7 @@ import java.util.List;
 public class RoleServlet extends HttpServlet {
     private RoleService roleService = new RoleServiceImpl();
 
+
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String method = req.getParameter("method");
@@ -32,7 +32,24 @@ public class RoleServlet extends HttpServlet {
             save(req, resp);
         } else if (method.equals("modify")) {
             modify(req, resp);
+        }else if(method.equals("delete")){
+            delete(req,resp);
         }
+    }
+
+    protected void delete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+        String rid = req.getParameter("rid");
+        int roleId = Integer.parseInt(rid);
+        int j = roleService.removeMid(roleId);
+        int k = roleService.removeRole(roleId);
+        resp.setContentType("text/html;charset=utf-8");
+        PrintWriter writer = resp.getWriter();
+        if (k > 0) {
+            writer.println("<script>alert('删除成功');location.href='/power/role/roles?method=select'</script>");
+        } else {
+            writer.println("<script>alert('删除失败');location.href='power/role/roles?method=select'</script>");
+        }
+
     }
 
     protected void select(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -103,6 +120,7 @@ public class RoleServlet extends HttpServlet {
 
     protected void modify(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int uid = Integer.parseInt(req.getParameter("rid"));
+        String act = req.getParameter("act");
         Role role = roleService.findRole(uid);
         List<Menu> all = roleService.getAllMenu();
         List<Menu> newAll = new ArrayList<>();
@@ -128,7 +146,11 @@ public class RoleServlet extends HttpServlet {
         }
         req.setAttribute("all", newAll);
         req.setAttribute("role", role);
-        req.getRequestDispatcher("edit.jsp").forward(req, resp);
+        if(act.equals("edit")){
+            req.getRequestDispatcher("edit.jsp").forward(req, resp);
+        }else {
+            req.getRequestDispatcher("info.jsp").forward(req, resp);
+        }
     }
 
 }
