@@ -14,4 +14,6 @@ public interface RoleDao {
     public List<Menu> getAllMenu();
 
     int insertRol(Role role);
+
+    Role findById(int id);
 }

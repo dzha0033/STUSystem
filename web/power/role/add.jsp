@@ -46,7 +46,7 @@
                         	<li><input type="checkbox" name="menu" value = "${m.menuId}" />${m.menuName}
                             	<ul>
                                 	<c:forEach items="${m.secondMenu}" var="m2">
-                                        <li>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" value="${m2.menuId}" name="menuid"  />${m2.menuName}</li>
+                                        <li>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" value="${m2.menuId}" name="menu"  />${m2.menuName}</li>
                                     </c:forEach>
                                 </ul>
                             </li>

@@ -9,6 +9,15 @@ public class Menu {
     private  Integer state;
     private String desc;
     private  String url;
+    private Integer use;
+
+    public Integer getUse() {
+        return use;
+    }
+
+    public void setUse(Integer use) {
+        this.use = use;
+    }
 
     private List<Role> roleList;
     private List<Menu> secondMenu;

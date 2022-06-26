@@ -79,7 +79,7 @@
                     <td>&nbsp;
                     	<a href="javascript:alert('操作成功！');">启用</a>
                         <a href="info.html">详情</a>						   
-                        <a href="/power/role/roles?method=modify">修改</a>
+                        <a href="/power/role/roles?method=modify&rid=${r.roleId}">修改</a>
 						<a href="javascript:void(0)" onclick="del();return false" class="tablelink"> 删除</a>						   
                     </td>
                 </tr>

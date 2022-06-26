@@ -14,4 +14,6 @@ public interface RoleService {
     public List<Menu> getAllMenu();
 
     public int insertRole(String rolename,int state, String[] ids);
+
+    Role findRole(int key);
 }

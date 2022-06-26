@@ -8,6 +8,7 @@ import com.yhp.dao.impl.MIddleDaoImpl;
 import com.yhp.dao.impl.RoleDaoImpl;
 import com.yhp.service.RoleService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RoleServiceImpl implements RoleService {
@@ -42,6 +43,16 @@ public class RoleServiceImpl implements RoleService {
             e.printStackTrace();
         }
         return k1;
+    }
+
+    @Override
+    public Role findRole(int key) {
+        Role role = new Role();
+        List menus = new ArrayList<>();
+        role = roleDao.findById(key);
+        menus = middleDao.findById(key);
+        role.setMenuList(menus);
+        return role;
     }
 
 
