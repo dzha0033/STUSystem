@@ -1,9 +1,11 @@
 package com.yhp.dao.impl;
 
+import com.yhp.bean.Menu;
 import com.yhp.bean.Role;
 import com.yhp.dao.DBUtils;
 import com.yhp.dao.RoleDao;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,5 +54,51 @@ public class RoleDaoImpl extends DBUtils implements RoleDao {
         }
 
         return total;
+    }
+
+    @Override
+    public List<Menu> getAllMenu() {
+        String sql = "select * from menu";
+        List all = new ArrayList<Menu>();
+        try {
+            resultSet = query(sql, null);
+            while (resultSet.next()) {
+                Menu menu = new Menu();
+                menu.setMenuId(resultSet.getInt("menuid"));
+                menu.setMenuName(resultSet.getString("menuname"));
+                menu.setUpMenuId(resultSet.getInt("upmenuid"));
+                menu.setState(resultSet.getInt("state"));
+                menu.setDesc(resultSet.getString("desc"));
+                menu.setUrl(resultSet.getString("url"));
+                all.add(menu);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeAll();
+        }
+        return all;
+    }
+
+    @Override
+    public int insertRol(Role role) {
+        int key = 0;
+        try {
+            String sql = "insert into role values(null,?,?)";
+            List params = new ArrayList<>();
+            params.add(role.getRoleName());
+            params.add(role.getRoleState());
+            int i = update(sql,params);
+
+            ResultSet generatedKeys = pps.getGeneratedKeys();
+            if(generatedKeys.next()){
+                key = generatedKeys.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            closeAll();
+        }
+        return key;
     }
 }

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>
@@ -28,29 +29,29 @@
         </div>
 </div>
 <div class="cztable">
-	<form action="list.html" method="post">
+	<form action="/power/role/roles?method=save" method="post">
 <table border="1" width="100%" class="table_a">
                 <tr  width="120px;">
                     <td width="120px">角色名：<span style="color:red">*</span>：</td>
                     <td>
-						<input type="text"  name="f_goods_image" value="管理员" />
+						<input type="text"  name="name" value="管理员" />
 					</td>
                 </tr>
 
                 <tr  width="120px;">
                     <td>菜单资源<span style="color:red">*</span>：</td>
                     <td>
+                        <c:forEach items="${all}" var="m">
 						<ul>
-                        	<li><input type="checkbox" name="menu"  />权限管理
+                        	<li><input type="checkbox" name="menu" value = "${m.menuId}" />${m.menuName}
                             	<ul>
-                                	<li>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu"  />人员管理</li>
-                                    <li>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu"  />角色管理</li>
-                                    <li>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu"  />菜单管理</li>
+                                	<c:forEach items="${m.secondMenu}" var="m2">
+                                        <li>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" value="${m2.menuId}" name="menuid"  />${m2.menuName}</li>
+                                    </c:forEach>
                                 </ul>
                             </li>
-                            <li><input type="checkbox" name="menu"  />个人中心</li>
-                            <li><input type="checkbox" name="menu"  />教务中心</li>
                         </ul>
+                        </c:forEach>
 					</td>
                 </tr>
                 

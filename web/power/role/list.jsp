@@ -28,7 +28,7 @@
 <div class="div_head" style="width: 100%;text-align:center;">
 		<span> <span style="float:left">当前位置是：权限管理-》角色管理</span> <span
 			style="float:right;margin-right: 8px;font-weight: bold">
-			<a style="text-decoration: none;" href="add.html">【新增角色】</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a style="text-decoration: none;" href="/power/role/roles?method=add">【新增角色】</a>&nbsp;&nbsp;&nbsp;&nbsp;
 		</span>
 		</span>
 	</div>
@@ -79,7 +79,7 @@
                     <td>&nbsp;
                     	<a href="javascript:alert('操作成功！');">启用</a>
                         <a href="info.html">详情</a>						   
-                        <a href="edit.html">修改</a>
+                        <a href="/power/role/roles?method=modify">修改</a>
 						<a href="javascript:void(0)" onclick="del();return false" class="tablelink"> 删除</a>						   
                     </td>
                 </tr>
@@ -89,9 +89,6 @@
         </table>
         
           <div class='MainStyle'>
-              <div class=''>
-                  <a href='http://sm.zk0731.com/OnlineTeaching/StudentMaterial.aspx?page=1' target='_self'>首页</a>
-              </div><div class=''><a href='javascript:void(0)' target='_self'>上一页</a></div>
               <div class=''><a href='/power/role/roles?method=select' target='_self'>首页</a>
               </div>
               <div class=''><a href='/power/role/roles?method=select&index=${pi.pageIndex-1<=1?1:pi.pageIndex-1}' target='_self'>上一页</a></div>

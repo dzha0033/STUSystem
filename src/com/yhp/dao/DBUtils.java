@@ -12,7 +12,7 @@ import java.util.ResourceBundle;
 public class DBUtils {
     //1.定义变量
     private Connection connection;
-    private PreparedStatement pps;
+    protected PreparedStatement pps;
     protected ResultSet resultSet;
     private int count;//存储收影响的行数
 
@@ -52,7 +52,7 @@ public class DBUtils {
     //4.得到预状态通道
     protected  PreparedStatement getPps(String sql){
         try {
-            pps= getConnection().prepareStatement(sql);
+            pps= getConnection().prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

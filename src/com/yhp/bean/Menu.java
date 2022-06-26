@@ -11,6 +11,15 @@ public class Menu {
     private  String url;
 
     private List<Role> roleList;
+    private List<Menu> secondMenu;
+
+    public List<Menu> getSecondMenu() {
+        return secondMenu;
+    }
+
+    public void setSecondMenu(List<Menu> secondMenu) {
+        this.secondMenu = secondMenu;
+    }
 
     public Integer getMenuId() {
         return menuId;
